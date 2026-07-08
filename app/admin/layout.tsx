@@ -3,6 +3,14 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import LogoutButton from "@/components/LogoutButton";
 
+const NAV = [
+  { href: "/admin", label: "Tableau de bord" },
+  { href: "/admin/cours", label: "Cours & stages" },
+  { href: "/admin/inscriptions", label: "Inscriptions" },
+  { href: "/admin/paiements", label: "Paiements" },
+  { href: "/admin/moniteurs", label: "Moniteurs" },
+];
+
 export default async function AdminLayout({
   children,
 }: {
@@ -31,31 +39,30 @@ export default async function AdminLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <header className="border-b border-neutral-200 bg-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-8">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-y-2 px-4 py-3">
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-2">
             <Link href="/admin" className="font-bold text-aube-600">
               Les Enfants de l&apos;Aube{" "}
               <span className="ml-1 rounded bg-aube-100 px-1.5 py-0.5 text-xs font-semibold text-aube-800">
                 Admin
               </span>
             </Link>
-            <nav className="flex items-center gap-5 text-sm font-medium text-neutral-600">
-              <Link href="/admin" className="hover:text-aube-600">
-                Tableau de bord
-              </Link>
-              <span className="cursor-default text-neutral-400" title="Sprint 3">
-                Cours &amp; stages
-              </span>
-              <span className="cursor-default text-neutral-400" title="Sprint 3">
-                Inscriptions
-              </span>
-              <span className="cursor-default text-neutral-400" title="Sprint 3">
-                Paiements
-              </span>
+            <nav className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium text-neutral-600">
+              {NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="hover:text-aube-600"
+                >
+                  {item.label}
+                </Link>
+              ))}
             </nav>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-neutral-500">{user.email}</span>
+            <span className="hidden text-sm text-neutral-500 sm:inline">
+              {user.email}
+            </span>
             <LogoutButton />
           </div>
         </div>

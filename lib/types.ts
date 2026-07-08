@@ -21,3 +21,43 @@ export type CourseAvailability = {
   confirmed_count: number;
   places_left: number;
 };
+
+export type RegistrationStatus =
+  | "pending"
+  | "confirmed"
+  | "cancelled"
+  | "waitlisted";
+
+export type Registration = {
+  id: string;
+  course_id: string;
+  child_first_name: string;
+  child_last_name: string;
+  child_birthdate: string;
+  parent_first_name: string;
+  parent_last_name: string;
+  parent_email: string;
+  parent_phone: string;
+  address: string;
+  medical_notes: string;
+  amount_due: number | null;
+  gdpr_consent: boolean;
+  status: RegistrationStatus;
+  created_at: string;
+  courses?: { title: string; type: string } | null;
+};
+
+export type PaymentStatus =
+  | "pending"
+  | "paid"
+  | "late"
+  | "failed"
+  | "refunded";
+
+export type Profile = {
+  id: string;
+  email: string;
+  full_name: string;
+  role: "admin" | "monitor";
+  created_at: string;
+};
