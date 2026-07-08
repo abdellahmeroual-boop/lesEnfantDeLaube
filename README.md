@@ -3,6 +3,10 @@
 Plateforme de gestion des inscriptions, paiements et moniteurs pour l'ASBL
 Les Enfants de l'Aube (cours de natation et stages vacances pour enfants).
 
+🌐 **Site en ligne** : https://enfants-de-laube.vercel.app
+📦 **Dépôt GitHub** : https://github.com/abdellahmeroual-boop/lesEnfantDeLaube
+(chaque `git push` sur `main` met automatiquement le site à jour)
+
 ## Stack
 
 - **Next.js 14** (App Router) + TypeScript
