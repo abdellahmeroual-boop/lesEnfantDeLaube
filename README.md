@@ -45,5 +45,5 @@ npm run create-admin -- email@exemple.be MotDePasseSolide
 - [x] **Sprint 1** — Projet Next.js, Supabase configuré, auth admin, schéma DB
 - [x] **Sprint 2** — Catalogue public, formulaire d'inscription, paiement Stripe
       (emails Resend : finalisation prévue au Sprint 4 avec le nom de domaine)
-- [ ] **Sprint 3** — Espace admin : inscriptions, cours, moniteurs, exports CSV
+- [x] **Sprint 3** — Espace admin : inscriptions, cours, moniteurs, exports CSV
 - [ ] **Sprint 4** — Tests, corrections, mise en ligne, nom de domaine
