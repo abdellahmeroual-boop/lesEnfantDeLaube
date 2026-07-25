@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Clock, Baby, Wallet } from "lucide-react";
 import type { Course } from "@/lib/types";
 import { priceForDate, formatEUR } from "@/lib/pricing";
 
@@ -14,17 +15,21 @@ export default function CourseCard({
 
   return (
     <div
-      className={`flex flex-col rounded-xl border bg-white p-5 shadow-sm ${
-        course.is_open ? "border-neutral-200" : "border-neutral-200 opacity-60"
+      className={`flex flex-col rounded-3xl border border-border bg-white p-6 shadow-sm transition-all duration-300 ${
+        course.is_open
+          ? "hover:-translate-y-1 hover:border-ocean/20 hover:shadow-xl"
+          : "opacity-60"
       }`}
     >
-      <div className="flex items-start justify-between gap-2">
-        <h3 className="text-lg font-bold text-neutral-900">{course.title}</h3>
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="font-display text-xl font-bold text-ocean">
+          {course.title}
+        </h3>
         <span
-          className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+          className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold ${
             course.type === "stage"
-              ? "bg-sky-100 text-sky-800"
-              : "bg-aube-100 text-aube-800"
+              ? "bg-ocean-soft text-ocean"
+              : "bg-sun-soft text-sun"
           }`}
         >
           {course.type === "stage" ? "Stage" : "Cours"}
@@ -32,27 +37,38 @@ export default function CourseCard({
       </div>
 
       {course.description && (
-        <p className="mt-2 text-sm text-neutral-600">{course.description}</p>
+        <p className="mt-2 text-sm text-foreground/70">{course.description}</p>
       )}
 
-      <dl className="mt-4 space-y-1.5 text-sm text-neutral-700">
-        <div className="flex gap-2">
-          <dt>🕐</dt>
+      <dl className="mt-5 space-y-2.5 text-sm text-foreground/80">
+        <div className="flex items-center gap-3">
+          <dt className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-ocean-soft">
+            <Clock className="h-4 w-4 text-ocean" />
+            <span className="sr-only">Horaire</span>
+          </dt>
           <dd>{course.schedule}</dd>
         </div>
-        <div className="flex gap-2">
-          <dt>👶</dt>
+        <div className="flex items-center gap-3">
+          <dt className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-ocean-soft">
+            <Baby className="h-4 w-4 text-ocean" />
+            <span className="sr-only">Âge</span>
+          </dt>
           <dd>
             De {course.age_min} à {course.age_max} ans
           </dd>
         </div>
-        <div className="flex gap-2">
-          <dt>💶</dt>
+        <div className="flex items-center gap-3">
+          <dt className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-sun-soft">
+            <Wallet className="h-4 w-4 text-sun" />
+            <span className="sr-only">Tarif</span>
+          </dt>
           <dd>
             {price !== null ? (
               <>
-                <strong>{formatEUR(price)}</strong>{" "}
-                <span className="text-neutral-500">
+                <strong className="font-display text-base text-ocean">
+                  {formatEUR(price)}
+                </strong>{" "}
+                <span className="text-foreground/50">
                   (tarif si inscription ce mois-ci)
                 </span>
               </>
@@ -63,16 +79,16 @@ export default function CourseCard({
         </div>
       </dl>
 
-      <div className="mt-4 flex-1" />
+      <div className="mt-5 flex-1" />
 
-      <div className="mt-2 flex items-center justify-between gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         {course.is_open ? (
           full ? (
-            <span className="text-sm font-semibold text-red-600">Complet</span>
+            <span className="text-sm font-bold text-red-600">Complet</span>
           ) : (
             <span
-              className={`text-sm font-semibold ${
-                placesLeft <= 3 ? "text-orange-600" : "text-green-700"
+              className={`text-sm font-bold ${
+                placesLeft <= 3 ? "text-sun" : "text-emerald-600"
               }`}
             >
               {placesLeft} place{placesLeft > 1 ? "s" : ""} restante
@@ -80,7 +96,7 @@ export default function CourseCard({
             </span>
           )
         ) : (
-          <span className="text-sm font-semibold text-neutral-500">
+          <span className="text-sm font-bold text-foreground/50">
             Inscriptions fermées
           </span>
         )}
@@ -88,10 +104,8 @@ export default function CourseCard({
         {course.is_open && (
           <Link
             href={`/inscription/${course.id}`}
-            className={`rounded-lg px-4 py-2 text-sm font-semibold text-white ${
-              full
-                ? "bg-neutral-500 hover:bg-neutral-600"
-                : "bg-aube-600 hover:bg-aube-700"
+            className={`rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:brightness-110 ${
+              full ? "bg-ocean" : "bg-sun"
             }`}
           >
             {full ? "Liste d'attente" : "Inscrire mon enfant"}

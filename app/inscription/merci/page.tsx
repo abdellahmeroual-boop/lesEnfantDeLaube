@@ -31,20 +31,30 @@ export default function MerciPage({
   const message = MESSAGES[searchParams.statut ?? ""] ?? MESSAGES.enregistre;
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background font-nunito">
       <SiteHeader />
-      <main className="mx-auto w-full max-w-xl flex-1 px-4 py-20 text-center">
-        <div className="text-5xl">{message.emoji}</div>
-        <h1 className="mt-4 text-2xl font-bold text-neutral-900">
-          {message.title}
-        </h1>
-        <p className="mt-3 text-neutral-600">{message.body}</p>
-        <Link
-          href="/"
-          className="mt-8 inline-block rounded-lg bg-aube-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-aube-700"
-        >
-          Retour à l&apos;accueil
-        </Link>
+      <main className="flex-1 bg-gradient-to-br from-ocean-soft via-white to-sun-soft">
+        <div className="mx-auto w-full max-w-xl px-4 py-20 text-center">
+          <div className="text-6xl">{message.emoji}</div>
+          <h1 className="mt-5 font-display text-3xl font-bold text-ocean">
+            {message.title}
+          </h1>
+          <p className="mt-4 text-lg text-foreground/70">{message.body}</p>
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/"
+              className="rounded-full bg-sun px-7 py-3.5 font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:brightness-110"
+            >
+              {"Retour à l'accueil"}
+            </Link>
+            <Link
+              href="/cours"
+              className="rounded-full bg-ocean px-7 py-3.5 font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:brightness-110"
+            >
+              Voir les autres cours
+            </Link>
+          </div>
+        </div>
       </main>
       <SiteFooter />
     </div>

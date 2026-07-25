@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useFormState, useFormStatus } from "react-dom";
 import {
@@ -7,7 +7,9 @@ import {
 } from "@/app/inscription/actions";
 
 const inputClass =
-  "mt-1 w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-aube-500 focus:outline-none focus:ring-1 focus:ring-aube-500";
+  "mt-1.5 w-full rounded-xl border border-border bg-white px-4 py-2.5 text-sm transition focus:border-sun focus:outline-none focus:ring-2 focus:ring-sun";
+
+const labelClass = "block text-sm font-semibold text-foreground/80";
 
 function SubmitButton({ isWaitlist }: { isWaitlist: boolean }) {
   const { pending } = useFormStatus();
@@ -15,7 +17,7 @@ function SubmitButton({ isWaitlist }: { isWaitlist: boolean }) {
     <button
       type="submit"
       disabled={pending}
-      className="mt-6 w-full rounded-lg bg-aube-600 px-4 py-3 text-sm font-semibold text-white hover:bg-aube-700 disabled:opacity-60"
+      className="mt-8 w-full rounded-full bg-sun px-6 py-4 font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:brightness-110 disabled:translate-y-0 disabled:opacity-60"
     >
       {pending
         ? "Envoi en cours…"
@@ -41,22 +43,24 @@ export default function RegistrationForm({
   return (
     <form
       action={formAction}
-      className="mt-6 rounded-xl border border-neutral-200 bg-white p-6 shadow-sm"
+      className="mt-6 rounded-3xl border border-border bg-white p-6 shadow-sm md:p-8"
     >
       <input type="hidden" name="course_id" value={courseId} />
 
-      <h2 className="font-semibold text-neutral-900">L&apos;enfant</h2>
+      <h2 className="font-display text-lg font-bold text-ocean">
+        L&apos;enfant
+      </h2>
       <div className="mt-3 grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium text-neutral-700">
+        <label className={labelClass}>
           Prénom *
           <input name="child_first_name" required className={inputClass} />
         </label>
-        <label className="block text-sm font-medium text-neutral-700">
+        <label className={labelClass}>
           Nom *
           <input name="child_last_name" required className={inputClass} />
         </label>
       </div>
-      <label className="mt-4 block text-sm font-medium text-neutral-700">
+      <label className={`mt-4 ${labelClass}`}>
         Date de naissance *
         <input
           type="date"
@@ -66,21 +70,21 @@ export default function RegistrationForm({
         />
       </label>
 
-      <h2 className="mt-8 font-semibold text-neutral-900">
+      <h2 className="mt-8 font-display text-lg font-bold text-ocean">
         Le parent / tuteur
       </h2>
       <div className="mt-3 grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium text-neutral-700">
+        <label className={labelClass}>
           Prénom *
           <input name="parent_first_name" required className={inputClass} />
         </label>
-        <label className="block text-sm font-medium text-neutral-700">
+        <label className={labelClass}>
           Nom *
           <input name="parent_last_name" required className={inputClass} />
         </label>
       </div>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium text-neutral-700">
+        <label className={labelClass}>
           Email *
           <input
             type="email"
@@ -89,7 +93,7 @@ export default function RegistrationForm({
             className={inputClass}
           />
         </label>
-        <label className="block text-sm font-medium text-neutral-700">
+        <label className={labelClass}>
           Téléphone *
           <input
             type="tel"
@@ -99,13 +103,15 @@ export default function RegistrationForm({
           />
         </label>
       </div>
-      <label className="mt-4 block text-sm font-medium text-neutral-700">
+      <label className={`mt-4 ${labelClass}`}>
         Adresse postale *
         <input name="address" required className={inputClass} />
       </label>
 
-      <h2 className="mt-8 font-semibold text-neutral-900">Fiche médicale</h2>
-      <label className="mt-3 block text-sm font-medium text-neutral-700">
+      <h2 className="mt-8 font-display text-lg font-bold text-ocean">
+        Fiche médicale
+      </h2>
+      <label className={`mt-3 ${labelClass}`}>
         Allergies, contre-indications, remarques (facultatif)
         <textarea
           name="medical_notes"
@@ -115,12 +121,12 @@ export default function RegistrationForm({
         />
       </label>
 
-      <label className="mt-6 flex items-start gap-3 text-sm text-neutral-700">
+      <label className="mt-8 flex items-start gap-3 rounded-2xl bg-ocean-soft p-4 text-sm text-foreground/80">
         <input
           type="checkbox"
           name="gdpr_consent"
           required
-          className="mt-0.5 h-4 w-4 rounded border-neutral-300 text-aube-600 focus:ring-aube-500"
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-border text-sun focus:ring-sun"
         />
         <span>
           J&apos;accepte que les données de ce formulaire soient utilisées par
@@ -131,7 +137,7 @@ export default function RegistrationForm({
       </label>
 
       {state?.error && (
-        <p className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
           {state.error}
         </p>
       )}
@@ -139,7 +145,7 @@ export default function RegistrationForm({
       <SubmitButton isWaitlist={isWaitlist} />
 
       {!isWaitlist && (
-        <p className="mt-3 text-center text-xs text-neutral-500">
+        <p className="mt-4 text-center text-xs text-foreground/50">
           Paiement sécurisé par Stripe — aucune donnée bancaire ne transite par
           notre site.
         </p>

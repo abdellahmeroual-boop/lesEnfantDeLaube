@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import LandingPage, {
-  PHONE_TEL,
-  EMAIL,
-} from "@/components/landing/LandingPage";
+import LandingPage from "@/components/landing/LandingPage";
+import { PHONE_TEL, EMAIL } from "@/lib/site";
 
 const TITLE = "Cours de natation pour enfants à Namur | Les enfants de l'aube";
 const DESCRIPTION =

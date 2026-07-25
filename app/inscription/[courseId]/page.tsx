@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { ArrowLeft, Clock, Baby, Wallet } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import RegistrationForm from "@/components/RegistrationForm";
@@ -34,15 +35,20 @@ export default async function InscriptionPage({
 
   if (!course.is_open) {
     return (
-      <div className="flex min-h-screen flex-col">
+      <div className="flex min-h-screen flex-col bg-background font-nunito">
         <SiteHeader />
         <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-16 text-center">
-          <h1 className="text-2xl font-bold">{course.title}</h1>
-          <p className="mt-4 text-neutral-600">
+          <h1 className="font-display text-2xl font-bold text-ocean">
+            {course.title}
+          </h1>
+          <p className="mt-4 text-foreground/70">
             Les inscriptions pour ce {course.type} sont actuellement fermées.
           </p>
-          <Link href="/" className="mt-6 inline-block text-aube-600 underline">
-            ← Retour au catalogue
+          <Link
+            href="/cours"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-sun px-6 py-3 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:brightness-110"
+          >
+            <ArrowLeft className="h-4 w-4" /> Retour au catalogue
           </Link>
         </main>
         <SiteFooter />
@@ -51,36 +57,63 @@ export default async function InscriptionPage({
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background font-nunito">
       <SiteHeader />
 
       <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-10">
-        <Link href="/" className="text-sm text-aube-600 hover:underline">
-          ← Retour au catalogue
+        <Link
+          href="/cours"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground/60 transition-colors hover:text-sun"
+        >
+          <ArrowLeft className="h-4 w-4" /> Retour au catalogue
         </Link>
 
-        <h1 className="mt-3 text-2xl font-bold text-neutral-900">
-          Inscription — {course.title}
+        <h1 className="mt-4 font-display text-3xl font-bold text-ocean">
+          Inscription — <span className="text-sun">{course.title}</span>
         </h1>
 
-        <div className="mt-4 rounded-xl border border-neutral-200 bg-white p-4 text-sm text-neutral-700">
-          <p>🕐 {course.schedule}</p>
-          <p className="mt-1">
-            👶 De {course.age_min} à {course.age_max} ans
-          </p>
+        <dl className="mt-6 space-y-2.5 rounded-3xl border border-border bg-ocean-soft p-6 text-sm text-foreground/80">
+          <div className="flex items-center gap-3">
+            <dt className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white">
+              <Clock className="h-4 w-4 text-ocean" />
+              <span className="sr-only">Horaire</span>
+            </dt>
+            <dd>{course.schedule}</dd>
+          </div>
+          <div className="flex items-center gap-3">
+            <dt className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white">
+              <Baby className="h-4 w-4 text-ocean" />
+              <span className="sr-only">Âge</span>
+            </dt>
+            <dd>
+              De {course.age_min} à {course.age_max} ans
+            </dd>
+          </div>
           {price !== null && (
-            <p className="mt-1">
-              💶 Tarif ce mois-ci : <strong>{formatEUR(price)}</strong>
-            </p>
+            <div className="flex items-center gap-3">
+              <dt className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white">
+                <Wallet className="h-4 w-4 text-sun" />
+                <span className="sr-only">Tarif</span>
+              </dt>
+              <dd>
+                Tarif ce mois-ci :{" "}
+                <strong className="font-display text-base text-ocean">
+                  {formatEUR(price)}
+                </strong>
+              </dd>
+            </div>
           )}
-        </div>
+        </dl>
 
         {full && (
-          <div className="mt-4 rounded-xl bg-orange-50 p-4 text-sm text-orange-800">
-            <strong>Ce {course.type} est complet.</strong> Vous pouvez inscrire
-            votre enfant sur la <strong>liste d&apos;attente</strong> : nous
-            vous contacterons dès qu&apos;une place se libère (aucun paiement ne
-            vous sera demandé aujourd&apos;hui).
+          <div className="mt-5 rounded-3xl bg-sun-soft p-6 text-sm text-foreground/80">
+            <strong className="text-ocean">
+              Ce {course.type} est complet.
+            </strong>{" "}
+            Vous pouvez inscrire votre enfant sur la{" "}
+            <strong>liste d&apos;attente</strong> : nous vous contacterons dès
+            qu&apos;une place se libère (aucun paiement ne vous sera demandé
+            aujourd&apos;hui).
           </div>
         )}
 

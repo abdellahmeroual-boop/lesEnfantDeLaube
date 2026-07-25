@@ -27,10 +27,7 @@ import {
 } from "lucide-react";
 import LandingImage from "./LandingImage";
 import { landingImages } from "@/lib/landing-images";
-
-export const PHONE = "+32 472 23 24 55";
-export const PHONE_TEL = "+32472232455";
-export const EMAIL = "lesenfantsdelaubeasbl@gmail.com";
+import { PHONE, PHONE_TEL, EMAIL } from "@/lib/site";
 
 // Page d'inscription en ligne (catalogue des cours et stages)
 const INSCRIPTION_URL = "/cours";
