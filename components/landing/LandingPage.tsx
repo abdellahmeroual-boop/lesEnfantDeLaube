@@ -237,6 +237,7 @@ function Header() {
             src={landingImages.logo}
             alt="Logo Les enfants de l'aube - école de natation Namur"
             className="h-10 md:h-12 w-auto"
+            priority
           />
           <span className="font-display font-bold text-ocean text-lg md:text-xl leading-tight hidden sm:block">
             Les enfants
@@ -353,14 +354,16 @@ function Hero() {
           <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto ring-8 ring-white">
             <LandingImage
               src={landingImages.heroPool}
-              alt="Enfants souriants avec leur moniteur de natation à Namur"
+              alt="Enfant qui s'amuse dans l'eau lors d'un cours de natation à Namur"
               className="w-full h-full object-cover"
+              priority
             />
           </div>
           <LandingImage
             src={landingImages.mascotte}
             alt="Mascotte pieuvre Les enfants de l'aube"
             className="animate-float absolute -bottom-6 -left-6 md:-left-14 w-32 md:w-48 drop-shadow-2xl"
+            priority
           />
           <div className="absolute -top-4 -right-2 md:-right-6 bg-white rounded-2xl shadow-xl px-4 py-3 flex items-center gap-2">
             <div className="flex text-sun">
@@ -891,7 +894,7 @@ function Temoignages() {
           <div className="mt-14 relative rounded-3xl overflow-hidden aspect-[21/9] shadow-2xl ring-8 ring-ocean-soft">
             <LandingImage
               src={landingImages.joy}
-              alt="Enfant heureuse en cours de natation à Namur"
+              alt="Groupe d'enfants et leur moniteur au bord de la piscine — Les enfants de l'aube, Namur"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ocean/70 via-transparent to-transparent" />

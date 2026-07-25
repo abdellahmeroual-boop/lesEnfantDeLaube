@@ -9,10 +9,13 @@ export default function LandingImage({
   src,
   alt,
   className = "",
+  priority = false,
 }: {
   src: string;
   alt: string;
   className?: string;
+  /** Images visibles d'emblée : chargées sans attendre le défilement. */
+  priority?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
   const ref = useRef<HTMLImageElement>(null);
@@ -45,6 +48,8 @@ export default function LandingImage({
       src={src}
       alt={alt}
       className={className}
+      loading={priority ? "eager" : "lazy"}
+      decoding="async"
       onError={() => setFailed(true)}
     />
   );
