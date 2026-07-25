@@ -256,24 +256,18 @@ function Header() {
               {l}
             </a>
           ))}
-          <Link
-            href={INSCRIPTION_URL}
-            className="text-sm font-semibold text-ocean hover:text-sun transition-colors"
-          >
-            Inscriptions
-          </Link>
         </nav>
         <div className="flex items-center gap-2 md:gap-3">
           <a
             href={`tel:${PHONE_TEL}`}
-            className="hidden xl:inline-flex items-center gap-2 text-ocean font-bold hover:text-sun transition-colors"
+            className="hidden md:inline-flex items-center gap-2 text-ocean font-bold hover:text-sun transition-colors"
           >
             <Phone className="h-4 w-4" /> {PHONE}
           </a>
-          <CTAButton href={INSCRIPTION_URL} className="!px-4 !py-2.5 !text-sm">
-            <Ticket className="h-4 w-4" />
-            <span className="hidden sm:inline">{"S'inscrire en ligne"}</span>
-            <span className="sm:hidden">{"S'inscrire"}</span>
+          <CTAButton href={`tel:${PHONE_TEL}`} className="!px-4 !py-2.5 !text-sm">
+            <Phone className="h-4 w-4" />
+            <span className="hidden sm:inline">Appelez-nous</span>
+            <span className="sm:hidden">Appeler</span>
           </CTAButton>
           <button
             className="lg:hidden p-2"
@@ -297,13 +291,6 @@ function Header() {
                 {l}
               </a>
             ))}
-            <Link
-              href={INSCRIPTION_URL}
-              onClick={() => setOpen(false)}
-              className="py-2 font-bold text-ocean"
-            >
-              Inscriptions en ligne
-            </Link>
             <a
               href={`tel:${PHONE_TEL}`}
               className="py-2 font-bold text-ocean flex items-center gap-2"
@@ -338,11 +325,11 @@ function Hero() {
             groupes.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <CTAButton href={INSCRIPTION_URL}>
-              <Ticket className="h-5 w-5" /> Inscrire mon enfant
-            </CTAButton>
-            <CTAButton href={`tel:${PHONE_TEL}`} variant="secondary">
+            <CTAButton href={`tel:${PHONE_TEL}`}>
               <Phone className="h-5 w-5" /> Appelez-nous
+            </CTAButton>
+            <CTAButton href="#tarifs" variant="secondary">
+              Voir les tarifs
             </CTAButton>
           </div>
           <p className="mt-5 text-sm text-foreground/60 font-medium">
@@ -354,7 +341,7 @@ function Hero() {
           <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto ring-8 ring-white">
             <LandingImage
               src={landingImages.heroPool}
-              alt="Enfant qui s'amuse dans l'eau lors d'un cours de natation à Namur"
+              alt="Enfants souriants avec leur moniteur de natation à Namur"
               className="w-full h-full object-cover"
               priority
             />
@@ -384,6 +371,11 @@ function Hero() {
 function Approche() {
   const items = [
     {
+      icon: Heart,
+      title: "Ambiance familiale",
+      text: "Un cadre chaleureux et rassurant, où votre enfant se sent à l'aise dès le premier cours.",
+    },
+    {
       icon: Users,
       title: "Groupes réduits",
       text: "Un suivi vraiment personnalisé : chaque enfant progresse à son rythme, jamais noyé dans la masse.",
@@ -396,55 +388,39 @@ function Approche() {
     {
       icon: Sparkles,
       title: "Pédagogie ludique",
-      text: "Le plaisir avant tout — un enfant qui s'amuse apprend plus vite et plus durablement.",
+      text: "Le plaisir avant tout. Un enfant qui s'amuse dans l'eau apprend plus vite et plus durablement.",
     },
   ];
   return (
     <Section id="approche" className="py-20 md:py-28 bg-white">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="grid lg:grid-cols-12 gap-6">
-          <Reveal className="lg:col-span-5">
-            <div className="h-full rounded-[2rem] bg-gradient-to-br from-ocean to-ocean/80 text-white p-8 md:p-10 relative overflow-hidden shadow-xl">
-              <div
-                className="absolute -bottom-10 -right-10 h-52 w-52 rounded-full bg-sun/30 blur-2xl"
-                aria-hidden
-              />
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur px-3 py-1 text-xs font-bold uppercase tracking-wider">
-                <Heart className="h-3.5 w-3.5" /> Notre approche
-              </span>
-              <h2 className="mt-5 font-display font-bold text-3xl md:text-4xl leading-tight">
-                Pourquoi les parents nous{" "}
-                <span className="text-sun-soft">confient leurs enfants</span>
-              </h2>
-              <p className="mt-5 text-white/85 text-lg leading-relaxed">
-                {
-                  "Une ambiance familiale, chaleureuse et rassurante — où votre enfant se sent à l'aise dès le premier plongeon."
-                }
-              </p>
-              <div className="mt-8 flex items-center gap-3 text-sm text-white/80">
-                <span className="h-px flex-1 bg-white/30" />
-                <span className="font-semibold">{"20 ans d'expérience"}</span>
-                <span className="h-px flex-1 bg-white/30" />
-              </div>
-            </div>
-          </Reveal>
-          <div className="lg:col-span-7 grid gap-4">
-            {items.map((it, i) => (
-              <Reveal key={it.title} delay={i * 100}>
-                <article className="group flex gap-5 items-start bg-ocean-soft rounded-[2rem] p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-white border border-transparent hover:border-ocean/15">
-                  <div className="h-14 w-14 shrink-0 rounded-2xl bg-white group-hover:bg-sun-soft flex items-center justify-center shadow-sm transition-colors">
-                    <it.icon className="h-7 w-7 text-sun" />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-bold text-xl text-ocean">
-                      {it.title}
-                    </h3>
-                    <p className="mt-1.5 text-foreground/70">{it.text}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+        <Reveal className="text-center max-w-2xl mx-auto">
+          <span className="inline-flex items-center gap-2 rounded-full bg-ocean-soft text-ocean text-xs font-bold uppercase tracking-wider px-3 py-1">
+            <Heart className="h-3.5 w-3.5" /> Notre approche
+          </span>
+          <h2 className="mt-4 font-display font-bold text-3xl md:text-5xl text-ocean">
+            Pourquoi les parents nous{" "}
+            <span className="text-sun">confient leurs enfants</span>
+          </h2>
+          <p className="mt-4 text-lg text-foreground/70">
+            Une approche humaine, pensée pour que votre enfant progresse en
+            confiance.
+          </p>
+        </Reveal>
+        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {items.map((it, i) => (
+            <Reveal key={it.title} delay={i * 100} className="h-full">
+              <article className="group h-full bg-ocean-soft rounded-[2rem] p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-white border border-transparent hover:border-ocean/15">
+                <div className="h-14 w-14 rounded-2xl bg-white group-hover:bg-sun-soft flex items-center justify-center shadow-sm transition-colors">
+                  <it.icon className="h-7 w-7 text-sun" />
+                </div>
+                <h3 className="mt-5 font-display font-bold text-xl text-ocean">
+                  {it.title}
+                </h3>
+                <p className="mt-1.5 text-foreground/70">{it.text}</p>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </div>
     </Section>
@@ -665,12 +641,17 @@ function Tarifs() {
       period: "sept. – déc.",
       price: "195€",
       note: "Dégressif selon le mois",
+      cta: "Nous contacter",
+      href: `tel:${PHONE_TEL}`,
     },
     {
       title: "Abonnement annuel",
       period: "année complète",
       price: "475€",
       note: "-50€ sur l'année",
+      // Seul point d'entrée vers les inscriptions en ligne
+      cta: "Réserver",
+      href: INSCRIPTION_URL,
       best: true,
       badge: "Meilleure offre",
     },
@@ -679,6 +660,8 @@ function Tarifs() {
       period: "jan. – juil.",
       price: "330€",
       note: "Dégressif selon le mois",
+      cta: "Nous contacter",
+      href: `tel:${PHONE_TEL}`,
     },
   ];
   return (
@@ -725,11 +708,16 @@ function Tarifs() {
                   {p.note}
                 </p>
                 <CTAButton
-                  href={INSCRIPTION_URL}
+                  href={p.href}
                   variant={p.best ? "white" : "primary"}
                   className="mt-8 w-full"
                 >
-                  <Ticket className="h-4 w-4" /> {"S'inscrire en ligne"}
+                  {p.href.startsWith("/") ? (
+                    <Ticket className="h-4 w-4" />
+                  ) : (
+                    <Phone className="h-4 w-4" />
+                  )}{" "}
+                  {p.cta}
                 </CTAButton>
               </div>
             </Reveal>
@@ -894,7 +882,7 @@ function Temoignages() {
           <div className="mt-14 relative rounded-3xl overflow-hidden aspect-[21/9] shadow-2xl ring-8 ring-ocean-soft">
             <LandingImage
               src={landingImages.joy}
-              alt="Groupe d'enfants et leur moniteur au bord de la piscine — Les enfants de l'aube, Namur"
+              alt="Enfant heureuse en cours de natation à Namur"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ocean/70 via-transparent to-transparent" />
@@ -925,10 +913,6 @@ function FAQ() {
     {
       q: "Mutuelle et réductions ?",
       a: "Attestation mutuelle sur demande. -10€ fratrie/parrainage.",
-    },
-    {
-      q: "Comment inscrire mon enfant ?",
-      a: "En ligne, en quelques minutes : choisissez le cours, remplissez le formulaire et payez en toute sécurité. Par téléphone si vous préférez.",
     },
   ];
   const [open, setOpen] = useState<number | null>(0);
@@ -968,15 +952,12 @@ function FAQ() {
             </Reveal>
           ))}
         </div>
-        <div className="mt-10 flex flex-col items-center gap-6">
+        <div className="mt-10 flex justify-center">
           <LandingImage
             src={landingImages.mascotte}
             alt="Mascotte"
             className="animate-float w-24 md:w-28"
           />
-          <CTAButton href={INSCRIPTION_URL}>
-            <Ticket className="h-5 w-5" /> Inscrire mon enfant en ligne
-          </CTAButton>
         </div>
       </div>
     </Section>
@@ -997,33 +978,30 @@ function Contact() {
                   Prêt à <span className="text-sun-soft">plonger</span> ?
                 </h2>
                 <p className="mt-4 text-lg text-white/85">
-                  Inscrivez votre enfant en ligne en quelques minutes — ou
-                  appelez-nous, on s&apos;occupe du reste.
+                  Un appel suffit pour réserver une place.
                 </p>
               </Reveal>
               <Reveal delay={150}>
-                <CTAButton
-                  href={INSCRIPTION_URL}
-                  className="mt-6 w-full sm:w-auto !text-xl !px-10 !py-5"
-                >
-                  <Ticket className="h-6 w-6" /> Inscrire mon enfant en ligne
-                </CTAButton>
                 <a
                   href={`tel:${PHONE_TEL}`}
-                  className="group mt-6 flex items-center gap-4 bg-white/10 hover:bg-white/20 rounded-2xl p-5 transition-colors"
+                  className="group flex items-center gap-4 bg-white/10 hover:bg-white/20 rounded-2xl p-5 transition-colors"
                 >
                   <div className="h-14 w-14 rounded-2xl bg-sun flex items-center justify-center shrink-0">
                     <Phone className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-white/70">
-                      Une question ? Appelez-nous
-                    </div>
+                    <div className="text-sm text-white/70">Appelez-nous</div>
                     <div className="font-display font-bold text-2xl md:text-3xl">
                       {PHONE}
                     </div>
                   </div>
                 </a>
+                <CTAButton
+                  href={`tel:${PHONE_TEL}`}
+                  className="mt-6 w-full sm:w-auto !text-xl !px-10 !py-5"
+                >
+                  <Phone className="h-6 w-6" /> Appelez-nous maintenant
+                </CTAButton>
                 <div className="mt-8 space-y-3 text-white/85">
                   <div className="flex items-start gap-3">
                     <Mail className="h-5 w-5 mt-0.5 text-sun-soft" />
@@ -1131,11 +1109,6 @@ function Footer() {
                 </a>
               </li>
             ))}
-            <li>
-              <Link href={INSCRIPTION_URL} className="font-semibold hover:text-sun">
-                Inscriptions en ligne
-              </Link>
-            </li>
           </ul>
         </div>
         <div>
@@ -1161,9 +1134,9 @@ function Footer() {
             © {new Date().getFullYear()}{" "}
             {"Les enfants de l'aube ASBL — Tous droits réservés."}
           </span>
-          <Link href="/login" className="hover:text-sun">
-            Espace équipe
-          </Link>
+          <a href="#" className="hover:text-sun">
+            Mentions légales
+          </a>
         </div>
       </div>
     </footer>
