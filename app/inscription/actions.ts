@@ -148,6 +148,10 @@ export async function submitRegistration(
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       customer_email: parentEmail,
+      locale: "fr",
+      // Reçu envoyé par Stripe au parent après paiement (uniquement en mode
+      // live — Stripe n'envoie jamais de reçus en mode test).
+      payment_intent_data: { receipt_email: parentEmail },
       line_items: [
         {
           price_data: {
