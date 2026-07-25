@@ -1,96 +1,69 @@
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
-import CourseCard from "@/components/CourseCard";
-import { createClient } from "@/lib/supabase/server";
-import type { Course, CourseAvailability } from "@/lib/types";
+import type { Metadata } from "next";
+import LandingPage, {
+  PHONE_TEL,
+  EMAIL,
+} from "@/components/landing/LandingPage";
 
-export const dynamic = "force-dynamic";
+const TITLE = "Cours de natation pour enfants à Namur | Les enfants de l'aube";
+const DESCRIPTION =
+  "Cours de natation ludiques et sécurisants pour enfants dès 4 ans à Namur. Groupes réduits, maîtres-nageurs diplômés. Inscrivez votre enfant en ligne.";
 
-export default async function HomePage() {
-  const supabase = createClient();
+export const metadata: Metadata = {
+  title: TITLE,
+  description: DESCRIPTION,
+  authors: [{ name: "Les enfants de l'aube ASBL" }],
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    type: "website",
+    siteName: "Les enfants de l'aube",
+    locale: "fr_BE",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+};
 
-  const [{ data: courses }, { data: availability }] = await Promise.all([
-    supabase.from("courses").select("*").order("title"),
-    supabase.from("course_availability").select("*"),
-  ]);
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "SportsActivityLocation",
+  name: "Les enfants de l'aube",
+  description: "École de natation pour enfants dès 4 ans à Namur.",
+  telephone: [PHONE_TEL],
+  email: EMAIL,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Rue Saint-Joseph 1",
+    postalCode: "5000",
+    addressLocality: "Namur",
+    addressCountry: "BE",
+  },
+  location: {
+    "@type": "Place",
+    name: "Piscine Louis Namêche",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Route de Gembloux 256",
+      postalCode: "5002",
+      addressLocality: "Saint-Servais (Namur)",
+      addressCountry: "BE",
+    },
+  },
+  sport: "Swimming",
+  areaServed: "Namur",
+};
 
-  const placesByCourse = new Map<string, number>(
-    ((availability ?? []) as CourseAvailability[]).map((a) => [
-      a.course_id,
-      a.places_left,
-    ])
-  );
-
-  const allCourses = (courses ?? []) as Course[];
-  const cours = allCourses.filter((c) => c.type === "cours");
-  const stages = allCourses.filter((c) => c.type === "stage");
-
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <SiteHeader />
-
-      <main className="flex-1">
-        <section className="bg-gradient-to-b from-aube-50 to-neutral-50">
-          <div className="mx-auto max-w-5xl px-4 py-16 text-center">
-            <h1 className="text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl">
-              Cours de natation et{" "}
-              <span className="text-aube-600">stages vacances</span>
-            </h1>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-600">
-              Inscrivez votre enfant en ligne en quelques minutes : choisissez
-              un cours ou un stage, remplissez le formulaire et payez en toute
-              sécurité.
-            </p>
-          </div>
-        </section>
-
-        <section id="catalogue" className="mx-auto max-w-5xl px-4 pb-16">
-          {allCourses.length === 0 ? (
-            <p className="py-12 text-center text-neutral-500">
-              Aucun cours ou stage n&apos;est disponible pour le moment.
-              Revenez bientôt !
-            </p>
-          ) : (
-            <>
-              {cours.length > 0 && (
-                <>
-                  <h2 className="mb-4 mt-4 text-2xl font-bold text-neutral-900">
-                    Cours à l&apos;année
-                  </h2>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {cours.map((c) => (
-                      <CourseCard
-                        key={c.id}
-                        course={c}
-                        placesLeft={placesByCourse.get(c.id) ?? c.capacity}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-
-              {stages.length > 0 && (
-                <>
-                  <h2 className="mb-4 mt-10 text-2xl font-bold text-neutral-900">
-                    Stages vacances
-                  </h2>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {stages.map((c) => (
-                      <CourseCard
-                        key={c.id}
-                        course={c}
-                        placesLeft={placesByCourse.get(c.id) ?? c.capacity}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-            </>
-          )}
-        </section>
-      </main>
-
-      <SiteFooter />
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
+      <LandingPage />
+    </>
   );
 }

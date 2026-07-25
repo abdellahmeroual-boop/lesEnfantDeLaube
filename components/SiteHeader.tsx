@@ -8,7 +8,7 @@ export default function SiteHeader() {
           Les Enfants de l&apos;Aube
         </Link>
         <nav className="flex items-center gap-6 text-sm font-medium">
-          <Link href="/#catalogue" className="text-neutral-600 hover:text-aube-600">
+          <Link href="/cours" className="text-neutral-600 hover:text-aube-600">
             Cours &amp; stages
           </Link>
           <Link

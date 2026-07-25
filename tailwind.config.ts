@@ -23,6 +23,16 @@ const config: Config = {
           950: "#371608",
           DEFAULT: "#C0521A",
         },
+        // Palette de la page vitrine (équivalents sRGB des oklch d'origine)
+        ocean: { DEFAULT: "#1A95BF", soft: "#EAF5F9" },
+        sun: { DEFAULT: "#F97315", soft: "#FDF0E1" },
+        foreground: "#172033",
+        border: "#E4E7EC",
+        background: "#FFFFFF",
+      },
+      fontFamily: {
+        display: ["var(--font-quicksand)", "ui-sans-serif", "sans-serif"],
+        nunito: ["var(--font-nunito)", "ui-sans-serif", "sans-serif"],
       },
     },
   },

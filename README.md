@@ -26,6 +26,17 @@ npm run dev        # http://localhost:3000
 Les clés d'environnement sont dans `.env.local` (jamais publié — voir
 `.env.example` pour la liste des variables).
 
+## Pages publiques
+
+- `/` — page vitrine (présentation, approche, tarifs, avis, FAQ, contact).
+  Boutons « S'inscrire en ligne » → `/cours`.
+- `/cours` — catalogue des cours et stages, point d'entrée des inscriptions.
+
+Les images de la vitrine se déposent dans `public/images/landing/` en gardant
+les noms listés dans [`lib/landing-images.ts`](lib/landing-images.ts)
+(`logo.png`, `mascotte.png`, `hero-pool.jpg`, `coach.jpg`, `joy.jpg`).
+Tant qu'un fichier manque, un dégradé de remplacement s'affiche à sa place.
+
 ## Base de données
 
 Le schéma complet est dans [`supabase/schema.sql`](supabase/schema.sql) :
