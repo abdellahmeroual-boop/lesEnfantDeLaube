@@ -145,13 +145,22 @@ export async function submitRegistration(
     const stripe = new Stripe(stripeKey);
     const base = siteUrl();
 
+    // Le gabarit du reçu Stripe n'est pas modifiable : seuls ces libellés le
+    // sont. Ils y sont repris tels quels, d'où le détail des horaires ici.
+    const typeLabel =
+      course.type === "stage" ? "Stage vacances" : "Cours à l'année";
+    const details = `${typeLabel} · ${course.schedule} · de ${course.age_min} à ${course.age_max} ans`;
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       customer_email: parentEmail,
       locale: "fr",
-      // Reçu envoyé par Stripe au parent après paiement (uniquement en mode
-      // live — Stripe n'envoie jamais de reçus en mode test).
-      payment_intent_data: { receipt_email: parentEmail },
+      payment_intent_data: {
+        // Reçu envoyé par Stripe au parent après paiement (uniquement en mode
+        // live — Stripe n'envoie jamais de reçus en mode test).
+        receipt_email: parentEmail,
+        description: `Inscription de ${childFirstName} ${childLastName} — ${course.title} (${course.schedule})`,
+      },
       line_items: [
         {
           price_data: {
@@ -159,7 +168,7 @@ export async function submitRegistration(
             unit_amount: Math.round(price * 100),
             product_data: {
               name: `${course.title} — ${childFirstName} ${childLastName}`,
-              description: course.schedule,
+              description: details,
             },
           },
           quantity: 1,
