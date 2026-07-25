@@ -24,7 +24,9 @@ const config: Config = {
           DEFAULT: "#C0521A",
         },
         // Palette de la page vitrine (équivalents sRGB des oklch d'origine)
-        ocean: { DEFAULT: "#1A95BF", soft: "#EAF5F9" },
+        // `deep` : fond des sections à texte clair — le bleu principal est trop
+        // lumineux pour porter du texte blanc de petite taille (contraste 3,5:1).
+        ocean: { DEFAULT: "#1A95BF", soft: "#EAF5F9", deep: "#0E6A8C" },
         sun: { DEFAULT: "#F97315", soft: "#FDF0E1" },
         foreground: "#172033",
         border: "#E4E7EC",

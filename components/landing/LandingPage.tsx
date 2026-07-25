@@ -456,9 +456,9 @@ function Benefices() {
     },
   ];
   return (
-    <Section className="relative py-20 md:py-28 bg-ocean text-white overflow-hidden">
+    <Section className="relative py-20 md:py-28 bg-ocean-deep text-white overflow-hidden">
       <div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-10"
         aria-hidden
         style={{
           backgroundImage:
@@ -477,25 +477,25 @@ function Benefices() {
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p className="text-white/80 md:text-right md:max-w-sm">
+            <p className="text-lg text-white/90 md:text-right md:max-w-sm">
               Ce que votre enfant emporte avec lui, bien au-delà de la piscine.
             </p>
           </Reveal>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-px bg-white/10 rounded-3xl overflow-hidden">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-px bg-white/10 rounded-3xl overflow-hidden">
           {items.map((it, i) => (
             <Reveal key={it.title} delay={i * 80} className="h-full">
-              <div className="group h-full bg-ocean p-6 md:p-7 transition-colors duration-300 hover:bg-ocean/70">
-                <span className="font-display text-xs text-sun-soft font-bold">
+              <div className="group h-full bg-ocean-deep p-6 md:p-7 transition-colors duration-300 hover:bg-ocean">
+                <span className="font-display text-sm text-sun-soft font-bold">
                   0{i + 1}
                 </span>
-                <div className="mt-4 h-12 w-12 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-sun group-hover:scale-110 transition-all">
+                <div className="mt-4 h-12 w-12 rounded-xl bg-white/15 flex items-center justify-center group-hover:bg-sun group-hover:scale-110 transition-all">
                   <it.icon className="h-6 w-6 text-sun-soft group-hover:text-white" />
                 </div>
-                <h3 className="mt-5 font-display font-bold text-lg">
+                <h3 className="mt-5 font-display font-bold text-xl">
                   {it.title}
                 </h3>
-                <p className="mt-2 text-sm text-white/70 leading-relaxed">
+                <p className="mt-2 text-sm md:text-base text-white/90 leading-relaxed">
                   {it.text}
                 </p>
               </div>
