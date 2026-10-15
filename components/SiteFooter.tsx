@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PHONE, PHONE_TEL, EMAIL } from "@/lib/site";
+import { PHONE, PHONE_TEL, EMAIL, ADDRESS } from "@/lib/site";
 
 export default function SiteFooter() {
   return (
@@ -25,7 +25,7 @@ export default function SiteFooter() {
                 {EMAIL}
               </a>
             </li>
-            <li>Rue Saint-Joseph 1, 5000 Namur</li>
+            <li>{ADDRESS}</li>
           </ul>
         </div>
       </div>

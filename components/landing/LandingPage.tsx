@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import LandingImage from "./LandingImage";
 import { landingImages } from "@/lib/landing-images";
-import { PHONE, PHONE_TEL, EMAIL } from "@/lib/site";
+import { PHONE, PHONE_TEL, EMAIL, ADDRESS } from "@/lib/site";
 
 // Page d'inscription en ligne (catalogue des cours et stages)
 const INSCRIPTION_URL = "/cours";
@@ -1008,49 +1008,29 @@ function Contact() {
                   </div>
                   <div className="flex items-start gap-3">
                     <MapPin className="h-5 w-5 mt-0.5 text-sun-soft" />
-                    <span>Rue Saint-Joseph 1, 5000 Namur</span>
+                    <span>{ADDRESS}</span>
                   </div>
                 </div>
               </Reveal>
             </div>
             <Reveal delay={200}>
-              <form
-                className="bg-white text-foreground rounded-3xl p-6 md:p-8 shadow-2xl space-y-4"
-                onSubmit={(e) => e.preventDefault()}
+              <a
+                href={`mailto:${EMAIL}`}
+                className="block bg-white text-foreground rounded-3xl p-6 md:p-8 shadow-2xl hover:shadow-2xl transition group"
               >
+                <div className="h-14 w-14 rounded-2xl bg-ocean-soft flex items-center justify-center mb-5 group-hover:scale-105 transition">
+                  <Mail className="h-7 w-7 text-ocean" />
+                </div>
                 <h3 className="font-display font-bold text-2xl text-ocean">
                   Écrivez-nous
                 </h3>
-                {[
-                  { l: "Nom", t: "text", n: "name" },
-                  { l: "Email", t: "email", n: "email" },
-                  { l: "Téléphone", t: "tel", n: "phone" },
-                ].map((f) => (
-                  <div key={f.n}>
-                    <label className="block text-sm font-semibold text-foreground/80 mb-1.5">
-                      {f.l}
-                    </label>
-                    <input
-                      type={f.t}
-                      name={f.n}
-                      required
-                      className="w-full rounded-xl border border-border bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sun focus:border-sun transition"
-                    />
-                  </div>
-                ))}
-                <div>
-                  <label className="block text-sm font-semibold text-foreground/80 mb-1.5">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={4}
-                    required
-                    className="w-full rounded-xl border border-border bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sun focus:border-sun transition"
-                  />
+                <p className="mt-2 text-foreground/70">
+                  Pour une question ou une inscription, envoyez-nous un email.
+                </p>
+                <div className="mt-5 inline-flex items-center gap-2 font-semibold text-ocean underline underline-offset-4 decoration-2 break-all">
+                  {EMAIL}
                 </div>
-                <CTAButton className="w-full">Envoyer</CTAButton>
-              </form>
+              </a>
             </Reveal>
           </div>
         </div>
@@ -1093,7 +1073,7 @@ function Footer() {
                 {EMAIL}
               </a>
             </li>
-            <li>Rue Saint-Joseph 1, 5000 Namur</li>
+            <li>{ADDRESS}</li>
           </ul>
         </div>
         <div>

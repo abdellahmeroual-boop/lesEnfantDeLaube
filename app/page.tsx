@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import LandingPage from "@/components/landing/LandingPage";
-import { PHONE_TEL, EMAIL } from "@/lib/site";
+import {
+  PHONE_TEL,
+  EMAIL,
+  ADDRESS_STREET,
+  ADDRESS_POSTAL_CODE,
+  ADDRESS_LOCALITY,
+} from "@/lib/site";
 
 const TITLE = "Cours de natation pour enfants à Namur | Les enfants de l'aube";
 const DESCRIPTION =
@@ -34,9 +40,9 @@ const JSON_LD = {
   email: EMAIL,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Rue Saint-Joseph 1",
-    postalCode: "5000",
-    addressLocality: "Namur",
+    streetAddress: ADDRESS_STREET,
+    postalCode: ADDRESS_POSTAL_CODE,
+    addressLocality: ADDRESS_LOCALITY,
     addressCountry: "BE",
   },
   location: {
