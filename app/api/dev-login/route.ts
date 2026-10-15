@@ -22,5 +22,5 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 401 });
   }
 
-  return NextResponse.redirect(new URL("/admin", url.origin));
+  return NextResponse.redirect(new URL("/espace", url.origin));
 }

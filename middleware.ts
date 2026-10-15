@@ -34,8 +34,13 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (request.nextUrl.pathname.startsWith("/admin") && !user) {
+  const path = request.nextUrl.pathname;
+  if ((path.startsWith("/admin") || path.startsWith("/moniteur")) && !user) {
     return NextResponse.redirect(new URL("/login", request.url));
+  }
+  // Déjà connecté : « Espace équipe » mène directement à son espace
+  if (path === "/login" && user) {
+    return NextResponse.redirect(new URL("/espace", request.url));
   }
 
   return response;

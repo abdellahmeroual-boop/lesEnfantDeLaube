@@ -34,7 +34,7 @@ export default function LoginPage() {
       return;
     }
 
-    router.push("/admin");
+    router.push("/espace");
     router.refresh();
   }
 
