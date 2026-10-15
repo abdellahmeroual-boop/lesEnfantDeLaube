@@ -47,6 +47,24 @@ export type Registration = {
   courses?: { title: string; type: string } | null;
 };
 
+// Enfant d'un groupe, tel qu'affiché aux moniteurs et à l'admin
+// (champs utiles en bord de bassin : ni email ni adresse).
+export type GroupChild = Pick<
+  Registration,
+  | "id"
+  | "course_id"
+  | "child_first_name"
+  | "child_last_name"
+  | "child_birthdate"
+  | "medical_notes"
+  | "parent_first_name"
+  | "parent_last_name"
+  | "parent_phone"
+>;
+
+export const GROUP_CHILD_FIELDS =
+  "id, course_id, child_first_name, child_last_name, child_birthdate, medical_notes, parent_first_name, parent_last_name, parent_phone";
+
 export type PaymentStatus =
   | "pending"
   | "paid"

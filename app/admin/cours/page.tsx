@@ -79,8 +79,14 @@ export default async function AdminCoursesPage() {
                     <td className="px-4 py-3 text-neutral-600">
                       {c.age_min}–{c.age_max} ans
                     </td>
-                    <td className="px-4 py-3 text-neutral-600">
-                      {Number(a?.confirmed_count ?? 0)}/{c.capacity}
+                    <td className="px-4 py-3">
+                      <Link
+                        href={`/admin/cours/${c.id}/enfants`}
+                        className="font-medium text-aube-600 hover:underline"
+                        title="Voir les enfants inscrits"
+                      >
+                        {Number(a?.confirmed_count ?? 0)}/{c.capacity}
+                      </Link>
                     </td>
                     <td className="px-4 py-3 text-neutral-600">
                       {c.monitor_id
@@ -100,6 +106,12 @@ export default async function AdminCoursesPage() {
                     </td>
                     <td className="px-4 py-3 text-right">
                       <div className="flex items-center justify-end gap-3">
+                        <Link
+                          href={`/admin/cours/${c.id}/enfants`}
+                          className="font-medium text-aube-600 hover:underline"
+                        >
+                          Enfants
+                        </Link>
                         <Link
                           href={`/admin/cours/${c.id}`}
                           className="font-medium text-aube-600 hover:underline"
