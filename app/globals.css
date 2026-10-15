@@ -10,6 +10,22 @@ body {
   @apply bg-neutral-50 text-neutral-900 antialiased;
 }
 
+/* Page vitrine : Lovable est en Tailwind v4 avec --radius: 1rem, dont
+   l'échelle d'arrondis, la petite ombre et l'espacement des titres diffèrent
+   de Tailwind v3. Limité à la vitrine pour ne pas toucher à l'admin. */
+.vitrine {
+  --radius-sm: 0.75rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 1.75rem;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+:where(.vitrine) :is(h1, h2, h3, h4) {
+  letter-spacing: -0.01em;
+}
+
 /* Animations de la page vitrine */
 @keyframes float-y {
   0%,

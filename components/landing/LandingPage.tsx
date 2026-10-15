@@ -32,7 +32,10 @@ import { PHONE, PHONE_TEL, EMAIL, ADDRESS } from "@/lib/site";
 // Page d'inscription en ligne (catalogue des cours et stages)
 const INSCRIPTION_URL = "/cours";
 
-const OCEAN = "#1A95BF";
+// Portage de la vitrine Lovable (Tailwind v4) vers Tailwind v3 : en v3, un
+// `md:text-*` réimpose sa hauteur de ligne, d'où les `md:leading-*` répétés.
+// Arrondis et petites ombres v4 : voir la classe `.vitrine` (globals.css).
+const OCEAN = "#01A2C5";
 
 function useRipple() {
   return (e: React.MouseEvent<HTMLElement>) => {
@@ -61,7 +64,7 @@ function CTAButton({
 }) {
   const ripple = useRipple();
   const base =
-    "btn-ripple inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 font-bold text-base md:text-lg transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-0.5";
+    "btn-ripple inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 font-bold text-base md:text-lg transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed";
   const styles = {
     primary: "bg-sun text-white hover:brightness-110",
     secondary: "bg-ocean text-white hover:brightness-110",
@@ -236,7 +239,7 @@ function Header() {
             className="h-10 md:h-12 w-auto"
             priority
           />
-          <span className="font-display font-bold text-ocean text-lg md:text-xl leading-tight hidden sm:block">
+          <span className="font-display font-bold text-ocean text-lg md:text-xl leading-tight md:leading-tight hidden sm:block">
             Les enfants
             <br className="hidden md:block" />
             <span className="md:hidden"> </span>
@@ -311,7 +314,7 @@ function Hero() {
           <span className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur px-4 py-1.5 text-sm font-bold text-ocean shadow-sm">
             <Sparkles className="h-4 w-4 text-sun" /> Namur • Dès 4 ans
           </span>
-          <h1 className="mt-5 font-display font-bold text-4xl md:text-6xl leading-[1.05] text-ocean">
+          <h1 className="mt-5 font-display font-bold text-4xl md:text-6xl leading-[1.05] md:leading-[1.05] text-ocean">
             Votre enfant apprend à nager,
             <br />
             <span className="text-sun">{"en confiance et en s'amusant."}</span>
@@ -368,11 +371,6 @@ function Hero() {
 function Approche() {
   const items = [
     {
-      icon: Heart,
-      title: "Ambiance familiale",
-      text: "Un cadre chaleureux et rassurant, où votre enfant se sent à l'aise dès le premier cours.",
-    },
-    {
       icon: Users,
       title: "Groupes réduits",
       text: "Un suivi vraiment personnalisé : chaque enfant progresse à son rythme, jamais noyé dans la masse.",
@@ -385,39 +383,54 @@ function Approche() {
     {
       icon: Sparkles,
       title: "Pédagogie ludique",
-      text: "Le plaisir avant tout. Un enfant qui s'amuse dans l'eau apprend plus vite et plus durablement.",
+      text: "Le plaisir avant tout — un enfant qui s'amuse apprend plus vite et plus durablement.",
     },
   ];
   return (
     <Section id="approche" className="py-20 md:py-28 bg-white">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <Reveal className="text-center max-w-2xl mx-auto">
-          <span className="inline-flex items-center gap-2 rounded-full bg-ocean-soft text-ocean text-xs font-bold uppercase tracking-wider px-3 py-1">
-            <Heart className="h-3.5 w-3.5" /> Notre approche
-          </span>
-          <h2 className="mt-4 font-display font-bold text-3xl md:text-5xl text-ocean">
-            Pourquoi les parents nous{" "}
-            <span className="text-sun">confient leurs enfants</span>
-          </h2>
-          <p className="mt-4 text-lg text-foreground/70">
-            Une approche humaine, pensée pour que votre enfant progresse en
-            confiance.
-          </p>
-        </Reveal>
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {items.map((it, i) => (
-            <Reveal key={it.title} delay={i * 100} className="h-full">
-              <article className="group h-full bg-ocean-soft rounded-[2rem] p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-white border border-transparent hover:border-ocean/15">
-                <div className="h-14 w-14 rounded-2xl bg-white group-hover:bg-sun-soft flex items-center justify-center shadow-sm transition-colors">
-                  <it.icon className="h-7 w-7 text-sun" />
-                </div>
-                <h3 className="mt-5 font-display font-bold text-xl text-ocean">
-                  {it.title}
-                </h3>
-                <p className="mt-1.5 text-foreground/70">{it.text}</p>
-              </article>
-            </Reveal>
-          ))}
+        <div className="grid lg:grid-cols-12 gap-6">
+          <Reveal className="lg:col-span-5">
+            <div className="h-full rounded-[2rem] bg-gradient-to-br from-ocean to-ocean/80 text-white p-8 md:p-10 relative overflow-hidden shadow-xl">
+              <div
+                className="absolute -bottom-10 -right-10 h-52 w-52 rounded-full bg-sun/30 blur-2xl"
+                aria-hidden
+              />
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur px-3 py-1 text-xs font-bold uppercase tracking-wider">
+                <Heart className="h-3.5 w-3.5" /> Notre approche
+              </span>
+              <h2 className="mt-5 font-display font-bold text-3xl md:text-4xl leading-tight md:leading-tight">
+                Pourquoi les parents nous{" "}
+                <span className="text-sun-soft">confient leurs enfants</span>
+              </h2>
+              <p className="mt-5 text-white/85 text-lg leading-relaxed">
+                Une ambiance familiale, chaleureuse et rassurante — où votre
+                enfant se sent à l&apos;aise dès le premier plongeon.
+              </p>
+              <div className="mt-8 flex items-center gap-3 text-sm text-white/80">
+                <span className="h-px flex-1 bg-white/30" />
+                <span className="font-semibold">20 ans d&apos;expérience</span>
+                <span className="h-px flex-1 bg-white/30" />
+              </div>
+            </div>
+          </Reveal>
+          <div className="lg:col-span-7 grid gap-4">
+            {items.map((it, i) => (
+              <Reveal key={it.title} delay={i * 100}>
+                <article className="group flex gap-5 items-start bg-ocean-soft rounded-[2rem] p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-white border border-transparent hover:border-ocean/15">
+                  <div className="h-14 w-14 shrink-0 rounded-2xl bg-white group-hover:bg-sun-soft flex items-center justify-center shadow-sm transition-colors">
+                    <it.icon className="h-7 w-7 text-sun" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-xl text-ocean">
+                      {it.title}
+                    </h3>
+                    <p className="mt-1.5 text-foreground/70">{it.text}</p>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </Section>
@@ -453,9 +466,9 @@ function Benefices() {
     },
   ];
   return (
-    <Section className="relative py-20 md:py-28 bg-ocean-deep text-white overflow-hidden">
+    <Section className="relative py-20 md:py-28 bg-ocean text-white overflow-hidden">
       <div
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-20"
         aria-hidden
         style={{
           backgroundImage:
@@ -474,25 +487,25 @@ function Benefices() {
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p className="text-lg text-white/90 md:text-right md:max-w-sm">
+            <p className="text-white/80 md:text-right md:max-w-sm">
               Ce que votre enfant emporte avec lui, bien au-delà de la piscine.
             </p>
           </Reveal>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-px bg-white/10 rounded-3xl overflow-hidden">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-px bg-white/10 rounded-3xl overflow-hidden">
           {items.map((it, i) => (
             <Reveal key={it.title} delay={i * 80} className="h-full">
-              <div className="group h-full bg-ocean-deep p-6 md:p-7 transition-colors duration-300 hover:bg-ocean">
-                <span className="font-display text-sm text-sun-soft font-bold">
+              <div className="group h-full bg-ocean p-6 md:p-7 transition-colors duration-300 hover:bg-ocean/70">
+                <span className="font-display text-xs text-sun-soft font-bold">
                   0{i + 1}
                 </span>
-                <div className="mt-4 h-12 w-12 rounded-xl bg-white/15 flex items-center justify-center group-hover:bg-sun group-hover:scale-110 transition-all">
+                <div className="mt-4 h-12 w-12 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-sun group-hover:scale-110 transition-all">
                   <it.icon className="h-6 w-6 text-sun-soft group-hover:text-white" />
                 </div>
-                <h3 className="mt-5 font-display font-bold text-xl">
+                <h3 className="mt-5 font-display font-bold text-lg">
                   {it.title}
                 </h3>
-                <p className="mt-2 text-sm md:text-base text-white/90 leading-relaxed">
+                <p className="mt-2 text-sm text-white/70 leading-relaxed">
                   {it.text}
                 </p>
               </div>
@@ -819,7 +832,7 @@ function Temoignages() {
                 <Star key={i} className="h-6 w-6 fill-current" />
               ))}
             </div>
-            <h2 className="font-display font-bold text-3xl md:text-5xl text-ocean leading-tight">
+            <h2 className="font-display font-bold text-3xl md:text-5xl text-ocean leading-tight md:leading-tight">
               Les familles nous font <span className="text-sun">confiance</span>
             </h2>
           </Reveal>
@@ -1027,7 +1040,7 @@ function Contact() {
                 <p className="mt-2 text-foreground/70">
                   Pour une question ou une inscription, envoyez-nous un email.
                 </p>
-                <div className="mt-5 inline-flex items-center gap-2 font-semibold text-ocean underline underline-offset-4 decoration-2 break-all">
+                <div className="mt-5 inline-flex items-center gap-2 font-semibold text-ocean underline underline-offset-4 decoration-2">
                   {EMAIL}
                 </div>
               </a>
@@ -1122,7 +1135,7 @@ function Footer() {
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background font-nunito">
+    <div className="vitrine min-h-screen bg-background font-nunito">
       <Header />
       <main>
         <Hero />
